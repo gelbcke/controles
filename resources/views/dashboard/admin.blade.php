@@ -25,13 +25,6 @@
    @endif
    <div class="col-md-12 col-lg-12 col-xl-12">
       <h3>Revisões</h3>
-
-SET: {{ $_ENV['2FACTOR_AUTH']; }}
-<br>
-      @if (config('app.2fa') == false)
-         Local Enviroment
-      @endif
-
       <div class="row">
          <div class="col-md-3 col-lg-3 col-xl-3">
             <section class="panel panel-featured-danger">

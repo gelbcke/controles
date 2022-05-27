@@ -32,7 +32,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -62,7 +62,7 @@ class LoginController extends Controller
             'last_login_ip' => $request->getClientIp()
         ]);
 
-        return redirect('/dashboard');
+        return redirect('/');
     }
 
     public function login(\Illuminate\Http\Request $request) {

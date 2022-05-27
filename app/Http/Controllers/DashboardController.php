@@ -23,7 +23,7 @@ use Session;
 class DashboardController extends Controller
 {
     protected   $request;
-    
+
     /**
      * Create a new controller instance.
      *
@@ -33,13 +33,13 @@ class DashboardController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function dash(Request $request)
     {
         // Atualiza banco com horário do último login
         $loginUpdate = User::find(Auth::user()->id);
@@ -54,16 +54,16 @@ class DashboardController extends Controller
         $user            = Auth::user()->id;
 
         $tec_responsavel = BlocoTecnico::where('user_id', $user)->pluck('bloco_id');
-        $mes_passado     = date('n') - 1;               
+        $mes_passado     = date('n') - 1;
         $now             = Carbon::now();
 
         $qt_ambientes    = Ambiente::whereNull('status')->count();
-        
-        $qt_projetores   = Projetor::count();  
 
-        $qt_impressoras  = Impressora::count(); 
+        $qt_projetores   = Projetor::count();
 
-        $qt_softwares    = SoftwareList::count(); 
+        $qt_impressoras  = Impressora::count();
+
+        $qt_softwares    = SoftwareList::count();
 
         $qt_softwares_lic = SoftwareKey::whereNull('status')->count();
 
@@ -75,12 +75,12 @@ class DashboardController extends Controller
             ->where(DB::raw('YEAR(created_at)'), '=', date('Y'))
             ->distinct('rev_id')
             ->count('rev_id');
-        
+
         $qt_revisao_mes_passado = RevisaoAmbiente::where(DB::raw('MONTH(created_at)'), '=', $mes_passado)
             ->where(DB::raw('YEAR(created_at)'), '=', date('Y'))
             ->distinct('rev_id')
             ->count('rev_id');
-        
+
         //Verfica revisões vencidas
         $revisoes_vencidas = Ambiente::whereNull('status')
             ->whereIn('bloco_id', $tec_responsavel)
@@ -91,7 +91,7 @@ class DashboardController extends Controller
                         ->orWhere('prox_revisao_3', '<', $today);
                 })
             ->count();
-        
+
         //Verfica revisões que vencem hoje
         $revisoes_v_t = Ambiente::whereNull('status')
             ->whereIn('bloco_id', $tec_responsavel)
@@ -123,8 +123,8 @@ class DashboardController extends Controller
         $close_ontime       = RevisaoAmbiente::whereMonth('created_at', Carbon::now()->month)
                                 ->whereYear('created_at', Carbon::now()->year)
                                 ->where('obs', 'LIKE', "%No Prazo.%")
-                                ->count();  
-                                
+                                ->count();
+
         if($total_rev_month > 0){
             $sla_month = $close_ontime / $total_rev_month * 100 ;
         }
@@ -133,15 +133,15 @@ class DashboardController extends Controller
         }
 
         //Fim calculo SLA
-        
+
         //GRÁFICOS
         //Count de revisões realizadas/vencidas
         //---
         //Geral
         /*
         $rev_graf_p = RevisaoAmbiente::select(
-                DB::raw('SUM(obs LIKE "%No Prazo.%" ) as rev_p'), 
-                DB::raw('SUM(obs LIKE "%após o vencimento.%") as rev_v'), 
+                DB::raw('SUM(obs LIKE "%No Prazo.%" ) as rev_p'),
+                DB::raw('SUM(obs LIKE "%após o vencimento.%") as rev_v'),
                 DB::raw('DATE_FORMAT(created_at, "%Y %m") month_year'),
                 DB::raw('DATE_FORMAT(created_at, "%M - %Y") month')
             )
@@ -155,12 +155,12 @@ class DashboardController extends Controller
                  DB::raw('ROUND(
                     SUM(obs LIKE "%No Prazo.%" )
                     /
-                    COUNT(*)  
-                    * 
+                    COUNT(*)
+                    *
                     100, 2)
-                    as 
+                    as
                     sla_hist
-                    '),            
+                    '),
                 DB::raw('DATE_FORMAT(created_at, "%Y %m") month_year'),
                 DB::raw('DATE_FORMAT(created_at, "%M - %Y") month')
             )
@@ -178,7 +178,7 @@ class DashboardController extends Controller
             ->join('blocos',function($q){
                     $q->on('revisao_ambientes.bloco_id', 'blocos.id');
                 })
-            ->whereMonth('revisao_ambientes.created_at', Carbon::now()->month) 
+            ->whereMonth('revisao_ambientes.created_at', Carbon::now()->month)
             ->where('obs','!=','No Prazo.')
             ->groupBy('bloco')
             ->orderBy('rev_bloco_v', 'desc')
@@ -190,21 +190,21 @@ class DashboardController extends Controller
                 DB::raw('blocos.id,blocos.name as total_blocos_count'),
                 'bloco_id as bloco',
                 DB::raw('ROUND(
-                    SUM(obs LIKE "%após o vencimento.%") 
-                    / 
+                    SUM(obs LIKE "%após o vencimento.%")
+                    /
                     COUNT(rev_id)
-                    * 
+                    *
                     100, 2)
-                    as 
+                    as
                     percent_rev_bloco
                     ')
             )
             ->join('blocos',function($q){
                     $q->on('revisao_ambientes.bloco_id', 'blocos.id');
-                })            
+                })
             ->groupBy('bloco')
             ->orderBy('percent_rev_bloco', 'desc')
-            ->limit(5) 
+            ->limit(5)
             ->get();
 
         $rev_em_andamento_cnt = RevisaoAmbiente::whereNull('rev_status')->count();
@@ -214,7 +214,7 @@ class DashboardController extends Controller
         //---------------------------------
         return view('dashboard.admin', compact('now', 'qt_revisao_mes', 'revisoes_vencidas', 'revisoes_v_t', 'revisoes_v_tp1', 'qt_ambientes', 'qt_projetores', 'qt_impressoras', 'sla_month', 'blocos_vencidos', 'percent_revisao_bloco', 'rev_em_andamento_cnt', 'rev_em_andamento_lst', 'qt_softwares', 'qt_softwares_lic', 'qt_imagens', 'qt_users_ativos'));
     }
-    
+
     public function pagenotfound()
     {
         return view('errors.pagenotfound');
@@ -230,15 +230,15 @@ class DashboardController extends Controller
                  DB::raw('ROUND(
                     SUM(obs LIKE "%No Prazo.%" )
                     /
-                    COUNT(*)  
-                    * 
+                    COUNT(*)
+                    *
                     100, 2)
-                    as 
+                    as
                     sla_hist
-                    '),  
+                    '),
                  //DB::raw('CONCAT(sla_hist_vl,"%") as sla_hist'),
-                DB::raw('SUM(obs LIKE "%No Prazo.%" ) as rev_p'), 
-                DB::raw('SUM(obs LIKE "%após o vencimento.%") as rev_v'),           
+                DB::raw('SUM(obs LIKE "%No Prazo.%" ) as rev_p'),
+                DB::raw('SUM(obs LIKE "%após o vencimento.%") as rev_v'),
                 DB::raw('DATE_FORMAT(created_at, "%Y %m") month_year'),
                 DB::raw('DATE_FORMAT(created_at, "%m/%Y") months')
             )

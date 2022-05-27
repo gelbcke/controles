@@ -31,11 +31,10 @@ Route::get('/mail_view', function () {
 
 	Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-Route::group( ['middleware' => ['auth', 'twofactor', 'auth.lock']], function() {
+	//INICIO
+		Route::get('/', 'DashboardController@dash')->name('dashboard');
 
-//INICIO
-	Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-	Route::get('/' ,'DashboardController@index');
+Route::group( ['middleware' => ['auth', 'twofactor', 'auth.lock']], function() {
 
 //SEGURANÇA
 	Route::resource('users', 'UserController');
