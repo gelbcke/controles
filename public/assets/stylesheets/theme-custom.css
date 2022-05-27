@@ -1,0 +1,59 @@
+/* Add here all your CSS customizations */
+
+/* Icone de carregamento de página*/
+.no-js #loader { display: none;  }
+
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+
+.se-pre-con {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: url(../images/loader-64x/Preloader_Controles.gif) center no-repeat #fff;
+}
+
+
+/* Imagens dos Projetores*/
+.zoom {
+  padding-top: 30px;
+  padding-left: 45px;
+  transition: transform .2s; /* Animation */
+  width: 200px;
+  height: 100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1000;
+}
+
+.zoom:hover {
+  transform: scale(3.0); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+/* LOADING / PROCESSING FORM */
+   #pageloader
+   {
+     background: rgba( 255, 255, 255, 0.8 );
+     display: none;
+     height: 100%;
+     position: fixed;
+     width: 100%;
+     z-index: 9999;
+   }
+
+   #pageloader img
+   {
+     left: 50%;
+     margin-left: -32px;
+     margin-top: -32px;
+     position: absolute;
+     top: 50%;
+   }
+   
+.processing {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
