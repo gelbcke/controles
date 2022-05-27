@@ -86,45 +86,45 @@ class DatabaseSeeder extends Seeder
 
         Permission::create(['name' => 'Editar Vencimentos']);
 
-                // Cria grupo de Permissão para Licençaes
-                Permission::create(['name' => 'Visualizar Licença']);
-                Permission::create(['name' => 'Visualizar Detalhes da Licença']);
-                Permission::create(['name' => 'Editar Licença']);
-                Permission::create(['name' => 'Remover Licença']);
-                Permission::create(['name' => 'Criar Licença']);
-        
-                Permission::create(['name' => 'Visualizar Fornecedores']);
-                Permission::create(['name' => 'Editar Fornecedores']);
-                Permission::create(['name' => 'Remover Fornecedores']);
-                Permission::create(['name' => 'Criar Fornecedores']);
-        
-                Permission::create(['name' => 'Visualizar Unidades']);
-                Permission::create(['name' => 'Editar Unidades']);
-                Permission::create(['name' => 'Remover Unidades']);
-                Permission::create(['name' => 'Criar Unidades']);
-        
-                Permission::create(['name' => 'Visualizar Blocos']);
-                Permission::create(['name' => 'Editar Blocos']);
-                Permission::create(['name' => 'Remover Blocos']);
-                Permission::create(['name' => 'Criar Blocos']);
-        
-                Permission::create(['name' => 'Visualizar Log']);
-        
-                Permission::create(['name' => 'Visualizar Termos de Responsabilidade']);
-                Permission::create(['name' => 'Editar Termos de Responsabilidade']);
-                Permission::create(['name' => 'Remover Termos de Responsabilidade']);
-                Permission::create(['name' => 'Criar Termos de Responsabilidade']);
-        
-                Permission::create(['name' => 'Visualizar Relógios Ponto']);
-                Permission::create(['name' => 'Editar Relógios Ponto']);
-                Permission::create(['name' => 'Remover Relógios Ponto']);
-                Permission::create(['name' => 'Criar Relógios Ponto']);
-        
-                Permission::create(['name' => 'Visualizar Notas Importantes']);
-                Permission::create(['name' => 'Remover Notas Importantes']);
-                Permission::create(['name' => 'Criar Notas Importantes']);
-        
-                Permission::create(['name' => 'Editar Hardware']);
+        // Cria grupo de Permissão para Licençaes
+        Permission::create(['name' => 'Visualizar Licença']);
+        Permission::create(['name' => 'Visualizar Detalhes da Licença']);
+        Permission::create(['name' => 'Editar Licença']);
+        Permission::create(['name' => 'Remover Licença']);
+        Permission::create(['name' => 'Criar Licença']);
+
+        Permission::create(['name' => 'Visualizar Fornecedores']);
+        Permission::create(['name' => 'Editar Fornecedores']);
+        Permission::create(['name' => 'Remover Fornecedores']);
+        Permission::create(['name' => 'Criar Fornecedores']);
+
+        Permission::create(['name' => 'Visualizar Unidades']);
+        Permission::create(['name' => 'Editar Unidades']);
+        Permission::create(['name' => 'Remover Unidades']);
+        Permission::create(['name' => 'Criar Unidades']);
+
+        Permission::create(['name' => 'Visualizar Blocos']);
+        Permission::create(['name' => 'Editar Blocos']);
+        Permission::create(['name' => 'Remover Blocos']);
+        Permission::create(['name' => 'Criar Blocos']);
+
+        Permission::create(['name' => 'Visualizar Log']);
+
+        Permission::create(['name' => 'Visualizar Termos de Responsabilidade']);
+        Permission::create(['name' => 'Editar Termos de Responsabilidade']);
+        Permission::create(['name' => 'Remover Termos de Responsabilidade']);
+        Permission::create(['name' => 'Criar Termos de Responsabilidade']);
+
+        Permission::create(['name' => 'Visualizar Relógios Ponto']);
+        Permission::create(['name' => 'Editar Relógios Ponto']);
+        Permission::create(['name' => 'Remover Relógios Ponto']);
+        Permission::create(['name' => 'Criar Relógios Ponto']);
+
+        Permission::create(['name' => 'Visualizar Notas Importantes']);
+        Permission::create(['name' => 'Remover Notas Importantes']);
+        Permission::create(['name' => 'Criar Notas Importantes']);
+
+        Permission::create(['name' => 'Editar Hardware']);
 
         // create roles and assign created permissions
         $role = Role::create(['name' => 'Administrador'])
@@ -165,6 +165,6 @@ class DatabaseSeeder extends Seeder
         RevisaoAmbienteAtividade::create([
             'nivel' => 'Nível 3',
         ]);
-   
+
     }
 }

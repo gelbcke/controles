@@ -1,6 +1,9 @@
 <img src="public/assets/images/CONTROLES.png" width="100%">
 
 ***
+[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/gelbcke/controles/blob/main/README.md)
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/gelbcke/controles/blob/main/README.en.md)
+
 Desenvolvido em Laravel 9!
 
 O sistema **Controles** foi desenvolvido para tornar a vida do profissional de TI mais fácil.
@@ -75,7 +78,7 @@ Todas as informações necessárias para o departamento são armazenadas aqui, t
 ### Configurando
 ***
 #### Configuração do servidor Web
-1. Instale o Apache
+1. Instale o Apache    
     `$ sudo apt update`   
     `$ sudo apt install apache2`
 

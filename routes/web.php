@@ -32,7 +32,7 @@ Route::get('/mail_view', function () {
 	Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 	//INICIO
-		Route::get('/', 'DashboardController@dash')->name('dashboard');
+	Route::get('/', 'DashboardController@dash')->name('dashboard');
 
 Route::group( ['middleware' => ['auth', 'twofactor', 'auth.lock']], function() {
 
